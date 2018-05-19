@@ -8,27 +8,68 @@ import FamilyChanger from './components/FamilyChanger';
 import TextContainer from './components/TextContainer';
 
 class App extends Component {
-  // constructor
+  /* constructor START */
+	constructor() {
+    super();
+    this.state = {
+      fontColor: 'black',
+      fontSize: 12,
+      fontFamily: 'monospace',
+      allowEdit: 'true'
+    }
+    /* bind this to methods START */
+    this.updateColor = this.updateColor.bind(this);
+    this.updateSize = this.updateSize.bind(this);
+    this.updateFamily = this.updateFamily.bind(this);
+    this.updateEditStatus = this.updateEditStatus.bind(this);
+    /* bind this to methods END */
+	}
+  /* constructor END */
 
-  // updateColor
 
-  // updateSize
+  /* updateColour START */
+  updateColor(val) {
+    this.setState({fontColor: val});
+  }
+  /* updateColour END */
 
-  // updateFamily
 
-  // updateEditStatus
+  /* updateSize START */
+  updateSize(val){
+    this.setState({fontSize: val});    
+  }
+  /* updateSize END */
+
+
+  /* updateFamily START */
+  updateFamily(val){
+    this.setState({fontFamily: val});    
+  }
+  /* updateFamily END */
+
+
+  /* updateEditStatus START */
+  updateEditStatus(val){
+    this.setState({allowEdit: val});    
+  }
+  /* updateEditStatus END */
+
 
   render() {
     return (
       <div>
         <div className="headerBar">
-          { /* Render EditToggle */ }
-          { /* Render ColorChanger */ }
-          { /* Render SizeChanger */ }
-          { /* Render FamilyChanger */ }
+          <EditToggle update = {this.updateEditStatus} />
+          <ColorChanger update = {this.updateColor} allowEdit={this.state.allowEdit} />
+          <SizeChanger update = {this.updateSize} allowEdit={this.state.allowEdit} />
+          <FamilyChanger update = {this.updateFamily} allowEdit={this.state.allowEdit} />
         </div>
         <div className="textArea">
-          { /* Render TextContainer */ }
+          <TextContainer 
+            fontColor = {this.state.fontColor}
+            fontSize = {this.state.fontSize}
+            fontFamily = {this.state.fontFamily}
+          />
         </div>
       </div>
     )
